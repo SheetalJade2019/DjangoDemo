@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 EVENT_TYPE_CHOICES = (("birthday","birthday"),("work anniversery","work anniversery"))
 
 class event_template(models.Model):
-    # template_id = models.AutoField(primary_key=True)
+    template_id = models.AutoField(primary_key=True)
     event_type  = models.CharField(max_length = 30,choices=EVENT_TYPE_CHOICES,default="birthday")
     template = models.TextField()
     # fields
