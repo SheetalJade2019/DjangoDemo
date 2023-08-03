@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "app",
+    'celery',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,9 @@ EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 EMAIL_PORT = env('EMAIL_PORT')
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+
+# Celery settings
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
+# set the celery timezone
+CELERY_TIMEZONE = 'UTC'

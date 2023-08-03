@@ -11,6 +11,13 @@ from .seed import seed_data
 from datetime import datetime
 # seed_data()
 from datetime import date
+# from .task import add
+from celery import shared_task
+  
+  
+@shared_task
+def add(x, y):
+    return x + y
 
 
 @api_view(['GET', 'POST'])
@@ -40,7 +47,11 @@ def check_event():
 
 #2 draft mail by referring template
 def draft_mail():
-    pass 
+    # run the task in 5 seconds
+    result = add.apply_async((2, 3), countdown=60) 
+    print("# # # # # # # RESULT :",result, datetime.now())
+    
+draft_mail()
 
 #3 send mail
 def try_send_mail(subject, message,email_from, recipient_list):
@@ -77,4 +88,4 @@ def add_template( event_type, template):
 # add_user("SJade", "SJade", "sheetal.jade93@gmail.com")
 # add_event("BIRTHDAY", 1, 1)
 # add_template("birthday","HAPPY BIRTHDAY..!")
-check_event()
+# check_event()
