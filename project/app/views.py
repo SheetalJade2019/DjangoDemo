@@ -63,9 +63,9 @@ def send_event_mail():
 @api_view(['POST'])
 def testcelery(request):
     try:
-        add.delay(2, 3) 
-        result = send_event_mail.app()
-        time.sleep(10)
+        # add.delay(2, 3) 
+        result = send_event_mail.apply_async(retry=True, retry_policy={'max_retries': 3})
+        # time.sleep(10)
         # result.get(timeout=1)
         logger.info(f"RESULT :=> {result.ready(), result.traceback}")
         return Response({"status":f"{result.ready()}"}, status=status.HTTP_200_OK)
