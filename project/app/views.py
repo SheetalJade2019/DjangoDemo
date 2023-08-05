@@ -64,7 +64,7 @@ def send_event_mail():
 def testcelery(request):
     try:
         add.delay(2, 3) 
-        result = send_event_mail.delay()
+        result = send_event_mail.app()
         time.sleep(10)
         # result.get(timeout=1)
         logger.info(f"RESULT :=> {result.ready(), result.traceback}")
@@ -74,7 +74,7 @@ def testcelery(request):
         return Response({"status":"Failed", "error":f"{str(e)}"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-# Automatic mail using scheduler
+"""# Automatic mail using scheduler
 import schedule
 import time
   
@@ -88,4 +88,6 @@ schedule.every(1).minutes.do(send_event_mail)
 while True:
     print("Check")
     schedule.run_pending()
-    time.sleep(60)
+    time.sleep(60)"""
+
+# celery -A project worker -l INFO & -D -f celery.log
