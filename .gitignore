@@ -5,3 +5,4 @@ __pycache__
 db.sqlite3
 # project\db.sqlite3
 envdataaxle
+*.log
