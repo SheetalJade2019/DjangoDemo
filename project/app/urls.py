@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import *
+from .views import testcelery
+
 urlpatterns = [
-    # path("",views.home, name="home")
+    path("testcelery/",testcelery, name="home")
 ]
